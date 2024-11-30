@@ -242,6 +242,23 @@ const deleteCategory = async (req, res) => {
   }
 };
 
+// This is for download zip file
+const downloadFile = async (req, res) => {
+  const { fileId } = req.params;
+  console.log('Received fileId:', fileId); // Log the fileId parameter
+  const fileUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+  console.log('Constructed Google Drive URL:', fileUrl); // Log the constructed Google Drive URL
+  
+  try {
+    const response = await axios.get(fileUrl, { responseType: 'stream' });
+    res.setHeader('Content-Type', response.headers['content-type'] || 'application/octet-stream');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileId}.jpg"`);
+    response.data.pipe(res);
+  } catch (error) {
+    console.error('Error fetching file:', error.message); // Log the error message
+    res.status(404).json({ message: 'File not found or inaccessible', error: error.message });
+  }
+};
 
 
 
@@ -249,4 +266,6 @@ const deleteCategory = async (req, res) => {
 
 
 
-export { uploadCard, deleteCard, deleteCategory, getCards, createCard, getCardById, updateCategory, uploadCardByCategory, deleteCategoryCard, uploadCardWithDriveLink, getCardsByClientId, UpdateCardWithDriveLink };
+
+
+export { uploadCard, deleteCard, deleteCategory, getCards, createCard, getCardById, updateCategory, uploadCardByCategory, deleteCategoryCard, uploadCardWithDriveLink, getCardsByClientId, UpdateCardWithDriveLink, downloadFile };
