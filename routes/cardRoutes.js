@@ -10,6 +10,7 @@ import {
   deleteCard,
   deleteCategory,
   updateCategory,
+  downloadFile,
 } from "../controllers/cardController.js";
 
 import { sendOtp, verifyOtp, googleAuth } from "../controllers/authController.js";
@@ -46,5 +47,7 @@ router.post("/send-otp", sendOtp);
 router.post("/verify-otp", verifyOtp);
 router.post("/google-auth", googleAuth);
 
+// Define the route for downloading files
+router.get('/download/:fileId', downloadFile);
 
 export default router;
