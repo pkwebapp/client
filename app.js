@@ -22,7 +22,7 @@ const __filename = fileURLToPath(import.meta.url);
 
 app.use(cors(
   {
-    origin: "https://www.pkphotography.io",
+    origin: "https://pkphotography.io",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   }
