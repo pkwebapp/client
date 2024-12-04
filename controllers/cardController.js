@@ -25,7 +25,6 @@ const createCard = async (req, res) => {
 
 const uploadCard = async (req, res) => {
   const { name, date, image, category } = req.body;
-  console.log(name, date, image, category);
 
   try {
     const uploadResponse = await cloudinary.v2.uploader.upload(image, {
@@ -130,7 +129,6 @@ const uploadCardWithDriveLink = async (req, res) => {
   const { name, clientId, driveLink, category } = req.body;
 
   try {
-    console.log("here");
     const news = await clientCard.create({ name, clientId,imageUrl: driveLink, category });
  
     res.status(201).json(news);
@@ -171,7 +169,6 @@ const UpdateCardWithDriveLink = async (req, res) => {
 
 const getCardsByClientId = async (req, res) => {
   try {
-    console.log("Fetching all cards");
     const cards = await Card.find(); // No fields specified, returns all card data
     res.status(200).json(cards);
   } catch (error) {
@@ -244,9 +241,7 @@ const deleteCategory = async (req, res) => {
 // This is for download zip file
 const downloadFile = async (req, res) => {
   const { fileId } = req.params;
-  console.log('Received fileId:', fileId); // Log the fileId parameter
   const fileUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-  console.log('Constructed Google Drive URL:', fileUrl); // Log the constructed Google Drive URL
   
   try {
     const response = await axios.get(fileUrl, { responseType: 'stream' });
