@@ -10,7 +10,6 @@ if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN || !proces
 }
 
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-console.log("Twilio SID:", process.env.TWILIO_ACCOUNT_SID);
 
 export const sendOtpToPhone = async (phoneNumber) => {
   const formattedPhoneNumber = phoneNumber.startsWith("+")
@@ -22,7 +21,6 @@ export const sendOtpToPhone = async (phoneNumber) => {
       .verifications
       .create({ to: formattedPhoneNumber, channel: "sms" });
       
-    console.log("OTP sent successfully:", verification.sid);
   } catch (error) {
     console.error("Twilio API Error:", error);
     throw new Error("Failed to send OTP");
