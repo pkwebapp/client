@@ -1,7 +1,6 @@
 import Card from '../models/cardModel.js';
 import cloudinary from 'cloudinary';
-import clientCard from "../models/clientCardModel.js";
-// import Card from "../models/clientCardModel.js";
+import axios from "axios";
 
 
 const createCard = async (req, res) => {
