@@ -14,6 +14,7 @@ import {
 } from "../controllers/cardController.js";
 
 import { sendOtp, verifyOtp, googleAuth } from "../controllers/authController.js";
+import { createBooking, deleteBooking, getAllBookings, getBooking } from "../controllers/bookingController.js";
 
 const router = express.Router();
 
@@ -49,5 +50,19 @@ router.post("/google-auth", googleAuth);
 
 // Define the route for downloading files
 router.get('/download/:fileId', downloadFile);
+
+//  ===================|| Booking Routes ||======================
+// router.post("/booking/email", sendBookingEmail);
+router.post('/booking/request', createBooking);
+
+// Get all bookings
+router.get('/booking/all', getAllBookings);
+
+// Get a single booking
+router.get('/booking/:id', getBooking);
+
+// Delete a booking
+router.delete('booking/:id', deleteBooking);
+
 
 export default router;
